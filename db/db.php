@@ -2,7 +2,7 @@
 
 class DB {
 
-    private $pdo;
+private $pdo;
 
     /**
      * Constructor de la clase DB
@@ -27,4 +27,5 @@ class DB {
     public function getPDO() {
         return $this->pdo;
     }
+
 }
