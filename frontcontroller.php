@@ -1,48 +1,36 @@
 <?php
 
-include 'controllers/TareasController.php';
-include 'models/TareasModel.php';
-include 'views/TareasView.php';
+// Lista blanca de controladores
+$controladores = ["Login", "Directory", "Error"];
 
-// Definir la acción por defecto
-define('ACCION_DEFECTO', 'listar');
-// Definir el controlador por defecto
-define('CONTROLADOR_DEFECTO', 'Tareas');
+// Definir controlador
+$nombreControlador = 'Login'; // por defecto
+if (isset($_GET["c"])) {
+    $nombreControlador = filter_input(INPUT_GET, 'c', FILTER_SANITIZE_STRING);
+    if (!in_array($nombreControlador, $controladores)) die("controlador no válido");
+} 
 
+// Cargar documentos
+$section = strtolower($nombreControlador);
 
-function lanzarAccion($controllerObj){
-    
-    if(isset($_GET["action"]) && method_exists($controllerObj, $_GET["action"])){
-        cargarAccion($controllerObj, $_GET["action"]);
-    } 
-    else{
-        cargarAccion($controllerObj, ACCION_DEFECTO);
-    }
+$model_path = $_SERVER['DOCUMENT_ROOT'] . '/6_2_ReservaHoteles/models/' . $section . 'Model.php';
+$controller_path = $_SERVER['DOCUMENT_ROOT'] . '/6_2_ReservaHoteles//controllers/' . $section . 'Controller.php';
+$view_path = $_SERVER['DOCUMENT_ROOT'] . '/6_2_ReservaHoteles/views/' . $section . 'View.php';
+
+if (is_file($model_path)) include_once $model_path;
+include_once $controller_path;
+include_once $view_path;
+
+// Instanciar controlador especificando su nombre
+$claseControlador = $nombreControlador . 'Controller';
+$objControlador = new $claseControlador();
+
+// Definir acción
+$accion = "mostrar"; // por defecto
+if (isset($_GET['a'])) {
+    $accion = filter_input(INPUT_GET, 'a', FILTER_SANITIZE_STRING);
+    if (!method_exists($objControlador, $accion)) die("accion no válida");
 }
 
-
-function cargarAccion($controllerObj, $action){
-    $accion=$action;
-    $controllerObj->$accion();
-}
-
-
-// Carga el controlador especificado y devuelve una instancia del mismo
-function cargarControlador($nombreControlador) {
-    $controlador = $nombreControlador . 'Controller';
-    if (class_exists($controlador)) {
-        return new $controlador();
-    } else {
-        die ("controlador no válido");
-    }
-}
-
-// Carga el controlador y la acción correspondientes
-if(isset($_GET["controller"])){
-    $controllerObj=cargarControlador($_GET["controller"]);
-    lanzarAccion($controllerObj);
-}else{
-    $controllerObj=cargarControlador(CONTROLADOR_DEFECTO);
-    lanzarAccion($controllerObj);
-}
-
+// LLamada a la acción a partir del objeto del controlador
+$objControlador->$accion();
