@@ -1,15 +1,17 @@
 <?php
 
-class ErrorController {
+include_once './views/errorsView.php';
+
+class ErrorsController {
     
     private $view;
 
     public function __construct() {
-        $this->view = new ErrorView();
+        $this->view = new ErrorsView();
     }
 
-    public function mostrar() {
+    public function show() {
         $error = isset($_GET['err']) ? filter_input(INPUT_GET, 'err', FILTER_VALIDATE_INT) : 0;
-        $this->view->imprimir($error);
+        $this->view->print($error);
     }
 }

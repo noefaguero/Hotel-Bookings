@@ -1,11 +1,11 @@
 <?php
 
-class LoginView {
+class UsersView {
 
     // Muestra el formulario para identificarse con el error si existe
-    public function imprimir($error="", $username="") {
+    public function print($error="", $username="") {
         echo
-            '<form action="index.php?c=Login&a=identificar" method="post" class="card mt-5 mx-auto p-3 col-sm-10 col-lg-6">
+            '<form action="index.php?c=Users&a=verify" method="post" class="card mt-5 mx-auto p-3 col-sm-10 col-lg-6">
                 <div class="mb-3">
                     <label for="user" class="form-label" >Usuario</label>
                     <input type="text" class="form-control" name="username" value="' . $username . '">

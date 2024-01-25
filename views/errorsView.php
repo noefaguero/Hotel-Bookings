@@ -1,10 +1,10 @@
 <?php
 
-class ErrorView {
+class ErrorsView {
     
-    public function imprimir($key) {
+    public function print($key = 0) {
         $errors = [
-            "La página web no existe",
+            "La página web no existe, comprueba la URL introducida",
             "En estos momentos estamos en labores de mantenimiento"
         ];
 
