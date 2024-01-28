@@ -10,16 +10,16 @@ class UsersController {
 
     public function __construct() {
         $this->view = new UsersView();
-        // instancio la clase UsersModel solo si la necesito (se abre la conexion)
+        // Instancia de la clase UsersModel solo es necesaria (se abre la conexion)
     }
 
     // Muestra el formulario para identificarse
     public function show() {
-        $this->view->print();
+        $this->view->printLogin();
     }
 
     // Procesa el formulario de identificanción de usuarios e inicia la sension
-    public function verify() {
+    public function verifyLogin() {
 
         // Recuperar los datos del formulario
         $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
@@ -27,20 +27,20 @@ class UsersController {
 
         // Validar los campos
         if (empty($username)) {
-            $this->view->print('Introduce nombre y contraseña');
+            $this->view->printLogin('Introduce nombre y contraseña');
             exit;
         }
 
         if (empty($password)) {
-            $this->view->print('Introduce nombre y contraseña', $username);
+            $this->view->printLogin('Introduce nombre y contraseña', $username);
             exit;
         }
 
         // Verificar credenciales del usuario
         $this->model = new UsersModel();
-        $id = $this->model->check($username, $password);
-        if (!$id) {
-            $this->view->print('Revise nombre de usuario y contraseña', $username);
+        $user = $this->model->getUser($username, $password);
+        if (!$user) {
+            $this->view->printLogin('Revise nombre de usuario y contraseña', $username);
             exit;
         } 
 
@@ -48,12 +48,12 @@ class UsersController {
         if (isset($_SESSION['usuario'])){
             $_SESSION = array();
             session_destroy();
-            setcookie(session_name(),"", time()-1000,"/");
+            setcookie(session_name(), "", time()-1000,"/");
         }
 
         // Iniciar sesion
         session_start();
-        $_SESSION['usuario'] = $this->model->getUser($id);
+        $_SESSION['usuario'] = $user;
 
         // Redirigir a página principal
         header('Location: ./index.php?c=Hotels');

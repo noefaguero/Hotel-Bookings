@@ -1,6 +1,6 @@
 <?php
 
-include_once './data/db.php';
+include_once './db/db.php';
 
 class RoomsModel {
 
@@ -9,10 +9,10 @@ class RoomsModel {
 
     public function __construct() {   
         $this->db = new DB();
-        $this->pdo = $this->db->getPDO();;
+        $this->pdo = $this->db->getPDO();
     }
 
-    public function getAllHotelRooms($hotel_id) {
+    public function getAllRooms($hotel_id) {
         try {
             $stmt = $this->pdo->prepare('SELECT * FROM habitaciones WHERE id_hotel=?;');
             $stmt->execute([$hotel_id]);

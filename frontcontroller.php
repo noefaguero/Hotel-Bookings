@@ -1,4 +1,5 @@
 <?php
+
 // Lista blanca de controladores
 $controladores = ["Users", "Hotels", "HotelRooms", "Errors"];
 

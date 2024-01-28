@@ -10,7 +10,7 @@ class HotelsController {
 
     public function __construct() {
         $this->view = new HotelsView();
-        // solo instacio el modelo si se necesita (se abre la conexión con la BD)
+        $this->model = new HotelsModel();
     }
 
     public function verify() {
@@ -27,16 +27,12 @@ class HotelsController {
     public function show() { 
         // Autorizacion
         self::verify();
-        // Comprobar si existe el array de hoteles en sesión
-        if (!isset($_SESSION['hoteles'])) {
-            $this->model = new HotelsModel();
-            $_SESSION['hoteles'] = $this->model->getAllHotels();
-        }
-        $this->view->print($_SESSION['hoteles']);
+        // Obtener array de hoteles
+        $hoteles = $this->model->getAllHotels();
+        // Imprimir vista
+        $this->view->printAllHotels($hoteles);
         exit;
     }
-
-    
 }
 
 

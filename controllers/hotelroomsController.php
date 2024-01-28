@@ -36,9 +36,7 @@ class HotelRoomsController {
         $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
         // Obtener objetos
         $hotel = $this->hotelsModel->getHotel($id);
-        $this->hotelsModel->closeConnection();
-        $habitaciones = $this->hotelsModel->getAllHotelRooms($id);
-        $this->roomsModel->closeConnection();
+        $habitaciones = $this->roomsModel->getAllRooms($id);
         // Imprimir
         $habitacionesView = $this->roomsView->createView($habitaciones);
         $this->hotelsView->printHotel($hotel, $habitacionesView);
