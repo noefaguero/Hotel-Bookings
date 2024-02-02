@@ -1,32 +1,20 @@
 <?php
 
+include_once './controllers/controller.php';
 include_once './models/hotelsModel.php';
-include_once './views/hotelsView.php';
 include_once './models/roomsModel.php';
-include_once './views/roomsView.php';
+include_once './views/hotelroomsView.php';
 
-class HotelRoomsController {
+class HotelRoomsController extends Controller {
     
     private $hotelsModel;
-    private $hotelsView;
     private $roomsModel;
-    private $roomsView;
+    private $View;
 
     public function __construct() {
         $this->hotelsModel = new HotelsModel();
-        $this->hotelsView = new HotelsView();
         $this->roomsModel = new RoomsModel();
-        $this->roomsView = new RoomsView();
-    }
-
-    public function verify() {
-        // Unirse a la sesión
-        session_start();
-        // Verificar si el usuario ha iniciado sesión
-        if (!isset($_SESSION['usuario'])) {
-            header("Location: ./index.php");
-            exit;
-        }
+        $this->View = new HotelRoomsView();
     }
 
     public function show() { // muestra un hotel y todas sus habitaciones
@@ -37,10 +25,9 @@ class HotelRoomsController {
         // Obtener objetos
         $hotel = $this->hotelsModel->getHotel($id);
         $habitaciones = $this->roomsModel->getAllRooms($id);
-        // Imprimir
-        $habitacionesView = $this->roomsView->createView($habitaciones);
-        $this->hotelsView->printHotel($hotel, $habitacionesView);
-        exit;
+        // Contruir vista
+        $this->View->build($hotel, $habitaciones);
+        return $this->View;
     }
 }
 

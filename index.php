@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="dark">
 <?php
-// Incluir el controlador frontal
-include_once 'frontController.php';
+include_once 'app.php'; // Incluir el controlador frontal
 ?>
 </html>

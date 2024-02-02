@@ -19,10 +19,11 @@ class HotelsModel {
                 $stmt->execute();
                 $stmt->setFetchMode(PDO::FETCH_OBJ);
                 $_SESSION['hoteles'] = $stmt->fetchAll();
-                $this->pdo = null; // Cerrar conexión
             } catch (PDOException $e) {
                 // echo  $e->getMessage();
                 header('Location: ./index.php?c=Errors&err=1');
+            } finally {
+                $this->pdo = null;
             }
         }
         
@@ -30,8 +31,12 @@ class HotelsModel {
     }
 
     public function getHotel($id) {
-        foreach ($_SESSION['hoteles'] as $hotel) {
-            if ($hotel->id == $id) return $hotel;
-        } 
+        $hotel = null;
+        $i=0;
+        do {
+            if ($_SESSION['hoteles'][$i]->id == $id) $hotel = $_SESSION['hoteles'][$i];
+            $i++;
+        } while ($i < (count($_SESSION['hoteles']) - 1) && $hotel == null);
+        return $hotel;
     }
 }

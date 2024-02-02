@@ -17,12 +17,28 @@ class RoomsModel {
             $stmt = $this->pdo->prepare('SELECT * FROM habitaciones WHERE id_hotel=?;');
             $stmt->execute([$hotel_id]);
             $stmt->setFetchMode(PDO::FETCH_OBJ);
-            $result = $stmt->fetchAll();
-            $this->pdo = null;
-            return $result;
+            return $stmt->fetchAll();
         } catch (PDOException $e) {
             // echo  $e->getMessage();
-            header('Location: ./index.php?c=Errosr&err=1');
+            header('Location: ./index.php?c=Errors&err=1');
+            exit;
+        } finally {
+            $this->pdo = null;
+        }
+    }
+
+    public function getRoom($hab_id) {
+        try {
+            $stmt = $this->pdo->prepare('SELECT * FROM habitaciones WHERE id=?;');
+            $stmt->execute([$hab_id]);
+            $stmt->setFetchMode(PDO::FETCH_OBJ);
+            return$stmt->fetch();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            header('Location: ./index.php?c=Errors&err=1');
+            exit;
+        } finally {
+            $this->pdo = null;
         }
     }
 }

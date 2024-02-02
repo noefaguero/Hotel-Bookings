@@ -1,9 +1,10 @@
 <?php
 
+include_once './controllers/controller.php';
 include_once './models/hotelsModel.php';
 include_once './views/hotelsView.php';
 
-class HotelsController {
+class HotelsController extends Controller {
     
     private $model;
     private $view;
@@ -13,16 +14,6 @@ class HotelsController {
         $this->model = new HotelsModel();
     }
 
-    public function verify() {
-        // Unirse a la sesión
-        session_start();
-        // Verificar si el usuario ha iniciado sesión
-        if (!isset($_SESSION['usuario'])) {
-            header("Location: ./index.php");
-            exit;
-        }
-    }
-
     // showAllHotels
     public function show() { 
         // Autorizacion
@@ -30,8 +21,8 @@ class HotelsController {
         // Obtener array de hoteles
         $hoteles = $this->model->getAllHotels();
         // Imprimir vista
-        $this->view->printAllHotels($hoteles);
-        exit;
+        $this->view->build($hoteles);
+        return $this->view;
     }
 }
 

@@ -1,7 +1,12 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+@font-face {
+    font-family: 'logo';
+    src: url(../assets/fonts/Righteous-Regular.ttf);
+}
+
+.logo{
+    font-family: 'logo';
+    color: rgba(255, 166, 1, 0.815);
+
 }
 
 .hotel__img{
@@ -9,10 +14,35 @@
     flex-basis: 100px;
 }
 
-.body{
-    background: linear-gradient(0deg, rgba(152,186,187) 0%, rgba(255,255,255) 100%);
+.bg-orange{
+    background-color: rgba(255, 166, 1, 0.815);
+}
+
+.text-orange{
+    color: rgba(255, 166, 1, 0.815);
+}
+
+.text-orange:hover{
+    color: rgba(122, 122, 122, 0.815);
 }
 
 .table__header{
     background-color: (152,186,187);
+}
+
+.bg-card{
+    background-color: #212529;
+}
+
+.hotel__header{
+    height: 300px;
+}
+
+.card-img-top{
+    object-fit: cover;
+}
+
+.footer__logo{
+    width: 40px;
+    height: 40px;
 }

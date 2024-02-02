@@ -1,8 +1,9 @@
 <?php
 
+include_once './controllers/controller.php';
 include_once './views/errorsView.php';
 
-class ErrorsController {
+class ErrorsController extends Controller {
     
     private $view;
 
@@ -11,7 +12,9 @@ class ErrorsController {
     }
 
     public function show() {
-        $error = isset($_GET['err']) ? filter_input(INPUT_GET, 'err', FILTER_VALIDATE_INT) : 0;
-        $this->view->print($error);
+        self::verify();
+        $message = isset($_GET['err']) ? filter_input(INPUT_GET, 'err', FILTER_VALIDATE_INT) : 0;
+        $this->view->build($message);
+        return $this->view;
     }
 }
