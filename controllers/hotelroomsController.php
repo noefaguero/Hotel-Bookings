@@ -9,12 +9,12 @@ class HotelRoomsController extends Controller {
     
     private $hotelsModel;
     private $roomsModel;
-    private $View;
+    private $view;
 
     public function __construct() {
         $this->hotelsModel = new HotelsModel();
         $this->roomsModel = new RoomsModel();
-        $this->View = new HotelRoomsView();
+        $this->view = new HotelRoomsView();
     }
 
     public function show() { // muestra un hotel y todas sus habitaciones
@@ -26,14 +26,14 @@ class HotelRoomsController extends Controller {
         $hotel = $this->hotelsModel->getHotel($id);
         $habitaciones = $this->roomsModel->getAllRooms($id);
         // Contruir vista
-        $this->View->build($hotel, $habitaciones);
-        return $this->View;
+        $this->view->build($hotel, $habitaciones);
+        return $this->view;
+    }
+
+    public function insert() {
+        
     }
 }
-
-
-
-
 
 
 

@@ -15,22 +15,12 @@ class UsersController {
 
     // Muestra el formulario para identificarse
     public function show() {
-        $this->view->buildLogin();
+        $this->view->build();
         return $this->view;
     }
 
     // Procesa el formulario de identificanción de usuarios e inicia la sension
     public function verifyLogin() {
-
-        if ($_SERVER['REQUEST_METHOD'] == "GET") {
-            $msg = filter_input(INPUT_POST, 'msg', FILTER_SANITIZE_STRING);
-            if ($msg == "denied") {
-                $this->view->buildLogin('Inicie sesión para continuar');
-                return $this->view;
-            }
-            header('Location: ./index.php?c=Errors');
-            exit;
-        }
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             // Recuperar los datos del formulario
@@ -39,12 +29,12 @@ class UsersController {
 
             // Validar los campos
             if (empty($username)) {
-                $this->view->buildLogin('Introduce nombre y contraseña');
+                $this->view->build('Introduce nombre y contraseña');
                 return $this->view;
             }
 
             if (empty($password)) {
-                $this->view->buildLogin('Introduce nombre y contraseña', $username);
+                $this->view->build('Introduce nombre y contraseña', $username);
                 return $this->view;
             }
 
@@ -52,7 +42,7 @@ class UsersController {
             $this->model = new UsersModel();
             $user = $this->model->getUser($username, $password);
             if (!$user) {
-                $this->view->buildLogin('Revise nombre de usuario y contraseña', $username);
+                $this->view->build('Revise nombre de usuario y contraseña', $username);
                 return $this->view;
             } 
 
@@ -78,6 +68,17 @@ class UsersController {
 
     // Cierra la sesión
     public function closeSession() {
+        
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            $msg = filter_input(INPUT_GET, 'msg', FILTER_SANITIZE_STRING);
+            if ($msg == "denied") {
+                $this->view->build('Inicie sesión para continuar');
+                return $this->view;
+            }
+            header('Location: ./index.php?c=Errors');
+            exit;
+        }
+
         // Unirse a la sesión
         session_start();
         // Destruir la sesión

@@ -1,10 +1,10 @@
 
-const tbody = document.getElementBtbody("tbody")
-const id = document.getElementById("id")
+const tbody = document.getElementById("tbody")
+const id_hab = document.getElementById("id_hab")
 
 const getRoomId = (event) => {
-    if (event.target.tagName === "BUTTON") {
-        event.target.setAttribute("value", )
+    if (event.target.tagName === "A") {
+        id_hab.setAttribute("value", event.target.getAttribute("data-room-id"))
     }
 }
 

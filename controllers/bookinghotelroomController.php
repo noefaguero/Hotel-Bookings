@@ -21,12 +21,13 @@ class BookingHotelRoom extends Controller {
         // Autorización
         self::verify();
         // Obtener objetos
-        if ( $_SERVER['REQUEST_METHOD']=='POST' ) {
-            $reserva = unserialize($_POST['reserva']);
-            $hotel = unserialize($_POST['hotel']);
-            $habitación = unserialize($_POST['habitacion']);
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' ) {
+            $reserva = filter_input(INPUT_GET, 'reserva', FILTER_SANITIZE_STRING);
+            $hotel = filter_input(INPUT_GET, 'hotel', FILTER_SANITIZE_STRING);
+            $habitación = filter_input(INPUT_GET, 'habitacion', FILTER_SANITIZE_STRING);
         } else {
             header("Location: ./index.php?c=Bookings");
+            exit;
         }
         // Construir vista
         $this->bookinghotelroomView->build($reserva, $hotel, $habitacion);

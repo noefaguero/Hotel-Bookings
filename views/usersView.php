@@ -9,7 +9,7 @@ class UsersView extends View {
     }
 
     // Muestra el formulario para identificarse con el error si existe
-    public function buildLogin($error="", $username="") {
+    public function build($error="", $username="") {
         
         // HEAD
         self::setTitle("Iniciar Sesión");

@@ -27,4 +27,21 @@ class BookingsModel {
             $this->pdo = null;
         }
     }
+
+    public function insert($id_hab, $entrada, $salida) {
+        try {
+            $stmt = $this->pdo->prepare('SELECT id_hotel FROM habitaciones WHERE id=?;');
+            $stmt->execute([$id_hab]);
+            $id_hotel = $stmt->fetch();
+            $stmt = $this->pdo->prepare('INSERT INTO reservas (id_usuario, id_hotel, id_habitacion, fecha_entrada, fecha_salida) VALUES(?, ?, ?, ?, ?);');
+            $stmt->execute([$_SESSION['usuario']->id, $id_hotel[0], $id_hab, $entrada, $salida]);
+            return;
+        } catch (PDOException $e) {
+            echo  $e->getMessage();
+            //header('Location: ./index.php?c=Errors&err=1');
+            //exit;
+        } finally {
+            $this->pdo = null;
+        }
+    }
 }

@@ -38,7 +38,7 @@ abstract class View {
         foreach ($scripts as $script) {
             $output .='<script defer src="' . $script . '"></script>';
         }
-        $this->script = $output;
+        $this->scripts = $output;
     }
 
     public function setTitle($title){

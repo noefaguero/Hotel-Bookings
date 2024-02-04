@@ -20,7 +20,7 @@ class HotelsView extends View {
         // Main
         $string = 
         '<main class="container p-5">
-        <h1 class="mb-5">Hoteles de Madrid</h1>';
+            <h1 class="mb-5 ms-5">Hoteles de Madrid</h1>';
 
         foreach ($hoteles as $hotel) {
             $string .= 

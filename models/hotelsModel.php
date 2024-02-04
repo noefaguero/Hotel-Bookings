@@ -36,7 +36,7 @@ class HotelsModel {
         do {
             if ($_SESSION['hoteles'][$i]->id == $id) $hotel = $_SESSION['hoteles'][$i];
             $i++;
-        } while ($i < (count($_SESSION['hoteles']) - 1) && $hotel == null);
+        } while ($i < (count($_SESSION['hoteles'])) && $hotel == null);
         return $hotel;
     }
 }
