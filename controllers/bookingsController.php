@@ -15,7 +15,6 @@ class BookingsController extends Controller {
     private $bookingsView;
 
     public function __construct() {
-        
         $this->bookingsView = new BookingsView();
     }
     
@@ -26,19 +25,23 @@ class BookingsController extends Controller {
         $this->bookingsModel = new BookingsModel();
         $reservas = $this->bookingsModel->getAllBookings($_SESSION['usuario']->id);
         // Recorrer array de reservas
-        $_SESSION['reservas'] = [];
-        $this->hotelsModel = new HotelsModel();
-        foreach ($reservas as $reserva) {
-            // Obtener objeto del hotel a partir del array guardado en sesión
-            $hotel = $this->hotelsModel->getHotel($reserva->id_hotel);
-            // Obtener objeto de la habitación
-            $this->roomsModel = new RoomsModel();
-            $habitacion = $this->roomsModel->getRoom($reserva->id_habitacion);
-            // Guardar reserva en sesión
-            array_push($_SESSION['reservas'], ["reserva" => $reserva, "hotel" => $hotel, "habitacion" => $habitacion]);
+        if (count($reservas) == 0) {
+            $bookingsList = null;
+        } else {
+            $bookingsList = '';
+            foreach ($reservas as $reserva) {
+                // Obtener objeto del hotel
+                $this->hotelsModel = new HotelsModel();
+                $hotel = $this->hotelsModel->getHotel($reserva->id_hotel);
+                // Obtener objeto de la habitación
+                $this->roomsModel = new RoomsModel();
+                $habitacion = $this->roomsModel->getRoom($reserva->id_habitacion);
+                // Guardar tarjeta de reserva 
+                $bookingsList .= $this->bookingsView->buildBooking($reserva, $hotel, $habitacion);
+            }
         }
         // Construir vista
-        $this->bookingsView->build($msg);
+        $this->bookingsView->build($bookingsList, $msg);
 
         return $this->bookingsView;
     }
@@ -55,5 +58,17 @@ class BookingsController extends Controller {
         $this->bookingsModel->insert($id_hab, $fecha_entrada, $fecha_salida);
         // Mostrar todas las reservas
         return self::show("LA RESERVA SE HA REALIZADO CORRECTAMENTE");
+    }
+
+    public function delete() {
+        // Autorización
+        self::verify();
+        // Obtener entrada
+        $id_reserva = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+        // Eliminar la reserva de la base de datos
+        $this->bookingsModel = new BookingsModel();
+        $this->bookingsModel->delete($id_reserva);
+        // Mostrar mensaje de confirmación
+        return self::show("LA RESERVA SE HA ELIMINADO");
     }
 }

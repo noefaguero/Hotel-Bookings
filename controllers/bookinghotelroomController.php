@@ -1,12 +1,13 @@
 <?php
 
 include_once './controllers/controller.php';
+include_once './models/bookingsModel.php';
 include_once './models/roomsModel.php';
 include_once './models/hotelsModel.php';
 include_once './views/bookinghotelroomView.php';
 
 
-class BookingHotelRoom extends Controller {
+class BookingHotelRoomController extends Controller {
     
     private $bookingsModel;
     private $hotelsModel;
@@ -14,6 +15,9 @@ class BookingHotelRoom extends Controller {
     private $bookinghotelroomView;
 
     public function __construct() {
+        $this->bookingsModel = new BookingsModel();
+        $this->hotelsModel = new HotelsModel();
+        $this->roomsModel = new RoomsModel();
         $this->bookinghotelroomView = new BookingHotelRoomView();
     }
 
@@ -22,16 +26,17 @@ class BookingHotelRoom extends Controller {
         self::verify();
         // Obtener objetos
         if ($_SERVER['REQUEST_METHOD'] == 'GET' ) {
-            $reserva = filter_input(INPUT_GET, 'reserva', FILTER_SANITIZE_STRING);
-            $hotel = filter_input(INPUT_GET, 'hotel', FILTER_SANITIZE_STRING);
-            $habitación = filter_input(INPUT_GET, 'habitacion', FILTER_SANITIZE_STRING);
+            $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+            $reserva = $this->bookingsModel->getBooking($id);
+            $hotel = $this->hotelsModel->getHotel($reserva->id_hotel);
+            $habitacion = $this->roomsModel->getRoom($reserva->id_habitacion);
         } else {
             header("Location: ./index.php?c=Bookings");
             exit;
         }
         // Construir vista
         $this->bookinghotelroomView->build($reserva, $hotel, $habitacion);
-        return $this->bookingsView;
+        return $this->bookinghotelroomView;
     }
 }
 

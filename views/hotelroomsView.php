@@ -90,12 +90,11 @@ class HotelRoomsView extends View {
         // Main
         $string = 
         '<main class="container p-5">
-        <h1 class="mb-5 ms-5">' . $hotel->nombre . '</h1>
+        <h1 class="mb-3 ms-3">' . $hotel->nombre . '</h1>
             <article class="card border-secondary m-3 row rounded-5 d-flex flex-column">
                 <div class="hotel__header overflow-hidden position-relative rounded-top-5 p-0">
                     <img src="data:image/jpg;base64,' . base64_encode($hotel->foto) .'" alt="'. $hotel->id .'" class="position-absolute w-100 z-0">
-                    <div class="position-absolute z-1 p-5">
-                        <p class="fw-bold fs-3">' . $hotel->nombre . '</p>
+                    <div class="position-absolute z-1 p-5 hotel__bg w-100 h-100">
                         <p class="fs-4">' . $hotel->ciudad . ', ' . $hotel->pais . '</p>
                         <p class="fs-4">' . $hotel->direccion . '</p>
                     </div>

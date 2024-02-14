@@ -38,8 +38,8 @@
     height: 300px;
 }
 
-.card-img-top{
-    object-fit: cover;
+.hotel__bg{
+    background: linear-gradient(90deg, rgb(48, 48, 48, 0.6) 50%, transparent 100%);
 }
 
 .footer__logo{
