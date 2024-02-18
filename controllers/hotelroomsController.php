@@ -21,7 +21,7 @@ class HotelRoomsController extends Controller {
         // Autorización
         self::verify();
         // Obtener id del hotel
-        $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
+        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
         // Obtener objetos
         $hotel = $this->hotelsModel->getHotel($id);
         $habitaciones = $this->roomsModel->getAllRooms($id);

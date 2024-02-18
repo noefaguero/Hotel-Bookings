@@ -56,8 +56,10 @@ class UsersController {
             // Iniciar sesion
             session_start();
             $_SESSION['usuario'] = $user;
+            // Registrar la última conexión del usuario en una cookie
+            setcookie('ultima_conexion', date('d-m-Y H:i:s'), time()+86400, "/"); 
 
-            // Redirigir a página principal
+            // Redirigir a la página principal
             header('Location: ./index.php?c=Hotels');
             exit;
         }

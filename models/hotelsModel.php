@@ -1,42 +1,44 @@
 <?php
 
-include_once './db/db.php';
 
-class HotelsModel {
+class HotelsModel extends DB {
 
-    private $db;
-    private $pdo;
-
+    private $table;
+    private $connection;
+    
     public function __construct() {
-        $this->db = new DB();
-        $this->pdo = $this->db->getPDO(); // Abrir conexión
+        $this->table = "hoteles";
     }
 
     public function getAllHotels() {
+        $this->connection = $this->connect();
         try {
-            $stmt = $this->pdo->prepare('SELECT * FROM hoteles;');
+            $stmt = $this->pdo->prepare('SELECT * FROM $this->table');
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_OBJ);
+            $this->disconnect();
             return $stmt->fetchAll();
         } catch (PDOException $e) {
+            $this->disconnect();
             // echo  $e->getMessage();
-            header('Location: ./index.php?c=Errors&err=1');
-        } finally {
-            $this->pdo = null;
-        }
+            header('Location: ./index.php?c=Errors&msg=1');
+            exit;
+        } 
     }
 
     public function getHotel($id) {
+        $this->connection = $this->connect();
         try {
-            $stmt = $this->pdo->prepare('SELECT * FROM hoteles WHERE id=?;');
+            $stmt = $this->pdo->prepare('SELECT * FROM $this->table WHERE id=?');
             $stmt->execute([$id]);
             $stmt->setFetchMode(PDO::FETCH_OBJ);
+            $this->disconnect();
             return $stmt->fetch();
         } catch (PDOException $e) {
+            $this->disconnect();
             // echo  $e->getMessage();
-            header('Location: ./index.php?c=Errors&err=1');
-        } finally {
-            $this->pdo = null;
+            header('Location: ./index.php?c=Errors&msg=1');
+            exit;
         }
     }
 }

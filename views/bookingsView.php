@@ -10,7 +10,7 @@ class BookingsView extends View {
 
     public function buildBooking($reserva, $hotel, $habitacion) {
         return 
-            '<article class="alert alert-light border-secondary m-3 row rounded-5">
+            '<article class="alert alert-light border-secondary m-3 p-4 rounded-5">
                 <p class="fw-bold fs-3">' . $hotel->ciudad. ' - ' . $hotel->nombre . '</p>
                 <p class="fw-bold">FECHA DE ENTRADA: ' . $reserva->fecha_entrada . '</p>
                 <p class="fw-bold">FECHA DE SALIDA: ' . $reserva->fecha_salida . '</p>

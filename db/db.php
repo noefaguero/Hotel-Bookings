@@ -1,25 +1,41 @@
-<?php 
+<?php
 
-include_once './config/config.php';
-
-class DB {
-
-    private $pdo;
+abstract class DB {
+    
+    private $host = "localhost"; 
+    private $name = "aerolinea"; 
+    private $user = "root"; 
+    private $password = "";
+    private $connection;
 
     public function __construct() {
-        try {
-            // Crea una instancia de PDO
-            $this->pdo = new PDO('mysql:host='.host.';dbname='.dbname, dbuser, dbpassword);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Cargar la configuración desde el archivo
+        $config = require 'config.php';
 
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            //header('Location: ./index.php?c=Errors&err=1');
-        }
+        $this->host = $db['dbhost'];
+        $this->name = $db['dbname'];
+        $this->user = $db['dbuser'];
+        $this->password = $db['dbpassword'];
     }
 
-    // Obtiene una instancia de PDO
-    public function getPDO() {
-        return $this->pdo;
+    // Conectar a la base de datos 
+    public function connect() {
+        try { 
+            $this->connection = new PDO(
+                "mysql:host=$this->servername;dbname=$this->database;charset=utf8",
+                $this->username, 
+                $this->password
+            );
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+            return $this->connection;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            //header('Location: ./index.php?c=Errors&msg=1');
+        }
+    }
+    
+    // Desconectar la base de datos
+    public function disconnect() { 
+        $this->connection = null;
     }
 }

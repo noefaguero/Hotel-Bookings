@@ -1,6 +1,6 @@
 <?php
 
-const errorMsgs = [
+const errorsList = [
     0 => "La página web no se ha encontrado",
     1 => "En estos momentos estamos en labores de mantenimiento"
 ];
@@ -8,13 +8,22 @@ const errorMsgs = [
 class ErrorsView {
     
     public function build($key) {
+        
+        // HEAD
+        self::setTitle("Error");
 
-        if (!array_key_exists($key, errorMsgs)) $key = 0;
+        // BODY
+        // Header
+        $this->header = true;
+
+        //Main
+        if (!array_key_exists($key, errorsList)) $key = 0;
 
         $this->main = 
-        '<a class="btn btn-secondary " href="./index.php?c=Hotels" fs-5">VOLVER</a>
-        <article class="card mx-5 mx-auto p-3 col-sm-10 col-lg-6">
-            <p>' . errorMsgs[$key] . '</p>
+        '<main class="container p-5 w-75">
+        <article class="alert bg-card border-secondary m-3 p-3 rounded-5 d-flex justify-content-center">
+            <p>' . errorsList[$key] . '</p>
+            <button class="btn btn-secondary btn-orange" onclick="history.back()">VOLVER</button>
         <article>';
         // volver
         

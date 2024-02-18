@@ -71,14 +71,17 @@ $view = $objControlador->$accion();
                     <img class="footer__logo img-fluid" src="./assets/images/instagram.png" alt="#">
                 </a>
             </section>
-            <section class="d-flex flex-column align-items-center">
-                <ul class="nav gap-2 justify-content-center flex-wrap py-3">
+            <section class="d-flex flex-column align-items-center py-3">
+                <ul class="nav gap-2 justify-content-center flex-wrap">
                     <li class="nav-item"><a class="nav-link text-orange px-4" href="#">AVISO LEGAL</a></li>
                     <li class="nav-item"><a class="nav-link text-orange px-4" href="#">POLÍTICA DE PRIVACIDAD</a></li>
                     <li class="nav-item"><a class="nav-link text-orange px-4" href="#">POLÍTICA DE COOKIES</a></li>
                     <li class="nav-item"><a class="nav-link text-orange px-4" href="#">CONDICIONES DE VENTA</a></li>
                     <li class="nav-item"><a class="nav-link text-orange px-4" href="#">CONTACTO</a></li>
                 </ul>
+            </section>
+            <section class="py-3">
+                <p class="text-center"> Última conexión: <?php if (isset($_COOKIE['lastConnection'])) echo htmlspecialchars($_COOKIE['lastConnection']); ?></p>
             </section>
 		</div>
     </footer>

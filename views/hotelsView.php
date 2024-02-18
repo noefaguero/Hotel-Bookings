@@ -35,10 +35,7 @@ class HotelsView extends View {
                     <p>' . $hotel->direccion . '</p>
                     <p>' . $hotel->descripcion . '</p>
                     <p>Nº de habitaciones: ' . $hotel->num_habitaciones . '</p>
-                    <form method="post" action="index.php?c=HotelRooms" class="d-flex justify-content-center py-5">
-                        <input type="hidden" name="id" value="' . $hotel->id . '"/>
-                        <input type="submit" class="btn btn-secondary bg-orange px-3 rounded-5" value="VER HABITACIONES"/>
-                    </form>
+                    <a href="index.php?c=HotelRooms&id=' . $hotel->id . '" class="btn btn-secondary bg-orange px-3 rounded-5">VER HABITACIONES</a>
                 </div>
             </article>';
         } // fin foreach

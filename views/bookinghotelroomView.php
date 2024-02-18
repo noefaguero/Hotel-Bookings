@@ -17,7 +17,7 @@ class BookingHotelRoomView extends View {
         $main = 
         '<main class="container p-5 w-75">
             <h1 class="mb-5 ms-3">' . 'Reserva en ' . $hotel->nombre . '</h1>
-            <div class="alert alert-light border-secondary m-3 p-5 rounded-5">
+            <article class="alert bg-card border-secondary m-3 p-5 rounded-5">
                 <div class="d-flex justify-content-between">
                     <h2 class="fw-bold fs-5 m-0">ENTRADA</h2>
                     <p class="fs-5 m-0 pe-3">' . $reserva->fecha_entrada . '</p>
@@ -44,7 +44,7 @@ class BookingHotelRoomView extends View {
                 <div class="d-flex justify-content-center pt-5">
                     <button type="button" class="btn btn-secondary rounded-5" data-bs-toggle="modal" data-bs-target="#anular">Anular Reserva</button>
                 </div>
-            </div>
+            </article>
         </main>';
 
         $modal = 
