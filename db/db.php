@@ -1,40 +1,66 @@
 <?php
 
+/**
+ * Clase abstracta para gestionar la conexión a la base de datos.
+ */
 abstract class DB {
     
-    private $host = "localhost"; 
-    private $name = "aerolinea"; 
-    private $user = "root"; 
-    private $password = "";
-    private $connection;
+    /** @var string Host de la base de datos.
+     */
+    private $host; 
+    
+    /** @var string Nombre de la base de datos.
+     */
+    private $name; 
+    
+    /** @var string Usuario de la base de datos.
+     */
+    private $username; 
+    
+    /** @var string Contraseña de la base de datos.
+     */
+    private $password;
+    
+    /** @var PDO|null Conexión a la base de datos.
+     */
+    protected $connection; // Acceso desde subclases
 
+    /**
+     * Carga la configuración de la base de datos desde el archivo de configuración.
+     */
     public function __construct() {
-        // Cargar la configuración desde el archivo
-        $config = require 'config.php';
-
+        include './config/config.php';
         $this->host = $db['dbhost'];
         $this->name = $db['dbname'];
-        $this->user = $db['dbuser'];
+        $this->username = $db['dbusername'];
         $this->password = $db['dbpassword'];
     }
 
-    // Conectar a la base de datos 
+    /**
+     * Establece la conexión a la base de datos.
+     *
+     * @return void
+     */ 
     public function connect() {
         try { 
             $this->connection = new PDO(
-                "mysql:host=$this->servername;dbname=$this->database;charset=utf8",
+                "mysql:host=$this->host;dbname=$this->name;charset=utf8",
                 $this->username, 
                 $this->password
             );
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-            return $this->connection;
         } catch (PDOException $e) {
-            echo $e->getMessage();
-            //header('Location: ./index.php?c=Errors&msg=1');
+            // echo $e->getMessage();
+            header('Location: ./index.php?c=Errors&msg=1');
+            exit;
         }
     }
     
-    // Desconectar la base de datos
+    /**
+     * Realiza la desconexión de la base de datos.
+     *
+     * @return void
+     */
     public function disconnect() { 
         $this->connection = null;
     }

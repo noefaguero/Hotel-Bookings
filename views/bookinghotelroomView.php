@@ -2,10 +2,28 @@
 
 include_once './views/view.php';
 
+/**
+ * Vista de la información de una reserva.
+ */
 class BookingHotelRoomView extends View {
-
+    /**
+     * Implementa el constructor de la clase View, para inicializar los elementos html principales.
+     * 
+     * @return void
+     */
+    public function __construct() {
+        parent::__construct();
+    }
+    
+    /**
+     * Contruye los elementos HTML principales, incluido el main con la información de una reserva.
+     *
+     * @param  object $reserva Objeto de una reserva.
+     * @param  object $hotel Objeto de un hotel. 
+     * @param  object $habitacion Objeto de una habitación.
+     * @return void
+     */
     public function build($reserva, $hotel, $habitacion) {
-        
         // HEAD
         self::setTitle("Reserva en " . $hotel->nombre);
 
@@ -14,18 +32,19 @@ class BookingHotelRoomView extends View {
         $this->header = true;
 
         // Main
+        include_once './lib/functions/formatDate.php';
         $main = 
         '<main class="container p-5 w-75">
             <h1 class="mb-5 ms-3">' . 'Reserva en ' . $hotel->nombre . '</h1>
             <article class="alert bg-card border-secondary m-3 p-5 rounded-5">
                 <div class="d-flex justify-content-between">
                     <h2 class="fw-bold fs-5 m-0">ENTRADA</h2>
-                    <p class="fs-5 m-0 pe-3">' . $reserva->fecha_entrada . '</p>
+                    <p class="fs-5 m-0 pe-3">' . formatDate($reserva->fecha_entrada) . '</p>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between">
                     <h2 class="fw-bold fs-5 m-0">SALIDA</h2>
-                    <p class="fs-5 m-0 pe-3">' . $reserva->fecha_salida . '</p>
+                    <p class="fs-5 m-0 pe-3">' . formatDate($reserva->fecha_salida) . '</p>
                 </div>
                 <hr>
                 <h2 class="fw-bold fs-5 mb-3"> DIRECCIÓN </h2>

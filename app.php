@@ -50,13 +50,15 @@ $view = $objControlador->$accion();
 </head>
 <!-- BODY -->
 <body class="bg-black">
+    <!-- header -->
     <?php
-
     if ($view->header) include_once "./views/templates/header.php";
-    
-    echo $view->main;
-
     ?>
+    <!-- main -->
+    <?php
+    echo $view->main;
+    ?>
+    <!-- footer -->
     <footer class="container-fluid text-center bg-card mt-5">
         <div class="container d-flex flex-column justify-content-between">
             <h2 class="p-3 mt-5 fs-3">SÍGUENOS</h2>
@@ -72,7 +74,7 @@ $view = $objControlador->$accion();
                 </a>
             </section>
             <section class="d-flex flex-column align-items-center py-3">
-                <ul class="nav gap-2 justify-content-center flex-wrap">
+                <ul class="nav flex-column flex-xl-row gap-2 justify-content-center">
                     <li class="nav-item"><a class="nav-link text-orange px-4" href="#">AVISO LEGAL</a></li>
                     <li class="nav-item"><a class="nav-link text-orange px-4" href="#">POLÍTICA DE PRIVACIDAD</a></li>
                     <li class="nav-item"><a class="nav-link text-orange px-4" href="#">POLÍTICA DE COOKIES</a></li>
@@ -81,7 +83,7 @@ $view = $objControlador->$accion();
                 </ul>
             </section>
             <section class="py-3">
-                <p class="text-center"> Última conexión: <?php if (isset($_COOKIE['lastConnection'])) echo htmlspecialchars($_COOKIE['lastConnection']); ?></p>
+                <p class="text-center"><?php if (isset($_COOKIE['lastConnection'])) echo 'Última conexión: ' . htmlspecialchars($_COOKIE['lastConnection']); ?></p>
             </section>
 		</div>
     </footer>

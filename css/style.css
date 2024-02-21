@@ -9,40 +9,45 @@
 
 }
 
-.hotel__img{
-    aspect-ratio: 3/4;
-    flex-basis: 100px;
+.hotel__img {
+    aspect-ratio: 4/3;
+    height: 100%;
+    object-fit: cover;
 }
 
-.bg-orange{
+.bg-orange {
     background-color: rgba(255, 166, 1, 0.815);
 }
 
-.text-orange{
+.text-orange {
     color: rgba(255, 166, 1, 0.815);
 }
 
-.text-orange:hover{
+.text-orange:hover {
     color: rgba(122, 122, 122, 0.815);
 }
 
-.table__header{
+.table td {
+    vertical-align: middle;
+}
+
+.table__header {
     background-color: (152,186,187);
 }
 
-.bg-card{
+.bg-card {
     background-color: #212529;
 }
 
-.hotel__header{
+.hotel__header {
     height: 300px;
 }
 
-.hotel__bg{
+.hotel__bg {
     background: linear-gradient(90deg, rgb(48, 48, 48, 0.6) 50%, transparent 100%);
 }
 
-.footer__logo{
+.footer__logo {
     width: 40px;
     height: 40px;
 }

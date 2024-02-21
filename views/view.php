@@ -1,14 +1,43 @@
 <?php
 
+/**
+ * Clase abstracta que representa una vista en una aplicación web.
+ */
 abstract class View {
     
-    public $metadata;
+    /**
+     * @var string|null $meta Elementos meta adicionales.
+     */
+    public $meta;
+
+    /**
+     * @var string|null $styleSheets Elementos link para las hojas de estilo adicionales.
+     */
     public $styleSheets;
+
+    /**
+     * @var string|null $scripts Elementos script para los scripts de la página.
+     */
     public $scripts;
+
+    /**
+     * @var string $title Título de la página.
+     */
     public $title;
+
+    /**
+     * @var bool $header Indica si se debe mostrar el encabezado.
+     */
     public $header;
+
+    /**
+     * @var string $main Contenido principal de la página.
+     */
     public $main;
     
+    /**
+     * Inicializa las propiedades por defecto.
+     */
     public function __construct() {
         $this->metadata = null;
         $this->styleSheets = null;
@@ -17,15 +46,25 @@ abstract class View {
         $this->main = "";
     }
 
-    public function setMetadata($metadata){
+    /**
+     * Establece los elementos meta de la página.
+     *
+     * @param array $meta Array asociativo de cada elemennto meta con nombre y contenido.
+     */
+    public function setMeta($meta) {
         $output;
-        foreach ($metadata as $name => $content) {
+        foreach ($meta as $name => $content) {
             $output .= '<meta name="' . $name . '" content="' . $content . '">';
         }
-        $this->metadata = $output;
+        $this->meta = $output;
     }
 
-    public function setStyleSheet($styleSheet){
+    /**
+     * Establece los elementos link para las hojas de estilo.
+     *
+     * @param array $styleSheets Array con las rutas de las hojas de estilo.
+     */
+    public function setStyleSheet($styleSheet) {
         $output="";
         foreach ($styleSheets as $styleSheet) {
             $output .= '<link rel="styleSheet" href="' . $styleSheet . '">';
@@ -33,7 +72,12 @@ abstract class View {
         $this->stylesheet = $output;
     }
 
-    public function setScript($scripts){
+    /**
+     * Establece los elementos script de la página.
+     *
+     * @param array $scripts Array con las rutas de los scripts.
+     */
+    public function setScript($scripts) {
         $output="";
         foreach ($scripts as $script) {
             $output .='<script defer src="' . $script . '"></script>';
@@ -41,7 +85,12 @@ abstract class View {
         $this->scripts = $output;
     }
 
-    public function setTitle($title){
+    /**
+     * Establece el título de la página.
+     *
+     * @param string $title Título de la página.
+     */
+    public function setTitle($title) {
         $this->title = 'HEAVEN ROOMS | ' . $title;
     }
     

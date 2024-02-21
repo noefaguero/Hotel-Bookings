@@ -2,12 +2,25 @@
 
 include_once './views/view.php';
 
+/**
+ * Vista del listado de habitaciones de un hotel.
+ */
 class HotelRoomsView extends View {
-
+    /**
+     * Implementa el constructor de la clase View, para inicializar los elementos html principales.
+     * 
+     * @return void
+     */
     public function __construct() {
         parent::__construct();
     }
-
+    
+    /**
+     * Contruye los elementos HTML principales, incluido el main con el listado de las habitaciones de un hotel.
+     *
+     * @param  array $habitaciones Array de objetos de habitaciones de un hotel.
+     * @return void
+     */
     public function buildRoomsTable($habitaciones) {
 
         if (count($habitaciones) == 0) {
@@ -19,7 +32,7 @@ class HotelRoomsView extends View {
         
         // Tabla de habitaciones
         $tabla = 
-        '<table class="table table-hover">
+        '<table class="table table-hover text-center mb-0">
             <thead class="table__header rounded">
                 <tr>
                     <th scope="col">Nº</th>
@@ -35,7 +48,7 @@ class HotelRoomsView extends View {
             $tabla .= 
             '<tr>
                 <td>' . $habitacion->num_habitacion . '</td>
-                <td>' .$habitacion->tipo . '</td>
+                <td>' . $habitacion->tipo . '</td>
                 <td>' . $habitacion->precio . '€</td>
                 <td>' . $habitacion->descripcion . '</td>
                 <td>
@@ -54,17 +67,17 @@ class HotelRoomsView extends View {
                 <form class="modal-content bg-card rounded-5" action="./index.php?c=Bookings&a=insert" method="post">
                     <input type="hidden" id="id_hab" name="id"/>
                     <div class="modal-header">
-                        <p class="modal-title fs-5">RESERVAR HABITACIÓN</p>
+                        <p class="modal-title fs-5 text-center">RESERVAR HABITACIÓN</p>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body d-flex flex-column gap-3 align-center text-center">
                         <div class="d-flex flex-column">
                             <p class="fs-3">FECHA DE ENTRADA</p>
-                            <input type="date" class="w-50 mx-auto" name="reserva_entrada" min="'. $fecha_actual .'" max="' . $fecha_max . '" required/>
+                            <input type="date" class="w-50 mx-auto" name="reserva_entrada" min="' . $fecha_actual . '" max="' . $fecha_max . '" required/>
                         </div>
                         <div class="d-flex flex-column">
                             <p class="fs-3">FECHA DE SALIDA</p>
-                            <input type="date" class="w-50 mx-auto" name="reserva_salida" min="'. $fecha_actual .'" max="' . $fecha_max . '" required/>
+                            <input type="date" class="w-50 mx-auto" name="reserva_salida" min="' . $fecha_actual . '" max="' . $fecha_max . '" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -90,7 +103,7 @@ class HotelRoomsView extends View {
         // Main
         $string = 
         '<main class="container p-5">
-        <h1 class="mb-3 ms-3">' . $hotel->nombre . '</h1>
+        <h1 class="mb-5 text-center">' . $hotel->nombre . '</h1>
             <article class="card border-secondary m-3 row rounded-5 d-flex flex-column">
                 <div class="hotel__header overflow-hidden position-relative rounded-top-5 p-0">
                     <img src="data:image/jpg;base64,' . base64_encode($hotel->foto) .'" alt="'. $hotel->id .'" class="position-absolute w-100 z-0">
@@ -100,7 +113,7 @@ class HotelRoomsView extends View {
                     </div>
                 </div>
                 <div class="card-body p-5">
-                        <p class="mb-5">' . $hotel->descripcion . '</p>'
+                        <p class="mb-5 fs-5">' . $hotel->descripcion . '</p>'
                         . self::buildRoomsTable($habitaciones) . 
                 '</div>
             </article>

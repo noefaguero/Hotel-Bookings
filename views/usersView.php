@@ -2,18 +2,29 @@
 
 include_once './views/view.php';
 
+/**
+ * Vista del formulario para el inicio de sesión.
+ */
 class UsersView extends View {
-
+    /**
+     * Implementa el constructor de la clase View, para inicializar los elementos html principales.
+     * 
+     * @return void
+     */
     public function __construct() {
         parent::__construct();
     }
 
-    // Muestra el formulario para identificarse con el error si existe
+    /**
+     * Contruye los elementos HTML principales, incluido el main con el formulario de inicio de sesión.
+     *
+     * @param  mixed $error Feedback de error en la autenticación, si existe.
+     * @param  mixed $username Input previo del nombre de usuario, si existe.
+     * @return void
+     */
     public function build($error="", $username="") {
-        
         // HEAD
         self::setTitle("Iniciar Sesión");
-
         // BODY
         $this->main =
         '<header class="container-fluid">
