@@ -6,7 +6,7 @@ include_once './views/errorsView.php';
 /**
  * Controlador para la gestión de errores.
  */
-class ErrorsController extends Controller {
+class ErrorsController {
     
     /**
      * @var object Vista de error. 

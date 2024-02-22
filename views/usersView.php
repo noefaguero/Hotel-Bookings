@@ -34,11 +34,11 @@ class UsersView extends View {
             <form action="index.php?c=Users&a=verifyLogin" method="post" class="card my-5 mx-auto p-4 col-sm-10 col-lg-4 rounded-5">
                 <div class="mb-3">
                     <label for="user" class="form-label">Usuario</label>
-                    <input type="text" class="form-control rounded-5" name="username" value="' . $username . '">
+                    <input type="text" id="user" class="form-control rounded-5" name="username" value="' . $username . '">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control rounded-5" name="password">
+                    <input type="password" id="password" class="form-control rounded-5" name="password">
                 </div>
                 <div class="mb-3">
                     <p class="text-orange">' . $error . '</p>

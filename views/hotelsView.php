@@ -42,7 +42,7 @@ class HotelsView extends View {
                 </div>
                 <div class="col-md-8 px-0 ps-md-5 d-flex flex-column justify-content-between">
                     <div class="d-flex flex-column">
-                        <p class="fw-bold mt-3 mt-md-0 fs-4">' . $hotel->nombre . '</p>
+                        <h2 class="fw-bold mt-3 mt-md-0 fs-4">' . $hotel->nombre . '</h2>
                         <div class="d-flex justify-content-between">
                             <p class="m-0">' . $hotel->ciudad . ', ' . $hotel->pais . '</p>
                             <p class="m-0">' . $hotel->direccion . '</p>

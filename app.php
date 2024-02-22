@@ -8,8 +8,7 @@ $nombreControlador = 'Users'; // controlador del login por defecto
 if (isset($_GET["c"])) {
     $nombreControlador = filter_input(INPUT_GET, "c", FILTER_SANITIZE_STRING);
     if (!in_array($nombreControlador, controladores)) {
-        echo $nombreControlador;
-        //header('Location: ./index.php?c=Errors');
+        header('Location: ./index.php?c=Errors');
         exit;
     };
 } 
@@ -62,7 +61,7 @@ $view = $objControlador->$accion();
     <footer class="container-fluid text-center bg-card mt-5">
         <div class="container d-flex flex-column justify-content-between">
             <h2 class="p-3 mt-5 fs-3">SÍGUENOS</h2>
-            <section class="d-flex justify-content-center align-items-center py-3 mb-5">
+            <div class="d-flex justify-content-center align-items-center py-3 mb-5">
                 <a class="col-4 col-md-2 p-2" target="_blank" href="#">
                     <img class="footer__logo img-fluid" src="./assets/images/twitter.png" alt="#">
                 </a>
@@ -72,8 +71,8 @@ $view = $objControlador->$accion();
                 <a class="col-4 col-md-2 p-2" target="_blank" href="#">
                     <img class="footer__logo img-fluid" src="./assets/images/instagram.png" alt="#">
                 </a>
-            </section>
-            <section class="d-flex flex-column align-items-center py-3">
+            </div>
+            <div class="d-flex flex-column align-items-center py-3">
                 <ul class="nav flex-column flex-xl-row gap-2 justify-content-center">
                     <li class="nav-item"><a class="nav-link text-orange px-4" href="#">AVISO LEGAL</a></li>
                     <li class="nav-item"><a class="nav-link text-orange px-4" href="#">POLÍTICA DE PRIVACIDAD</a></li>
@@ -81,10 +80,10 @@ $view = $objControlador->$accion();
                     <li class="nav-item"><a class="nav-link text-orange px-4" href="#">CONDICIONES DE VENTA</a></li>
                     <li class="nav-item"><a class="nav-link text-orange px-4" href="#">CONTACTO</a></li>
                 </ul>
-            </section>
-            <section class="py-3">
+            </div>
+            <div class="py-3">
                 <p class="text-center"><?php if (isset($_COOKIE['lastConnection'])) echo 'Última conexión: ' . htmlspecialchars($_COOKIE['lastConnection']); ?></p>
-            </section>
+            </div>
 		</div>
     </footer>
 </body>

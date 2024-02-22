@@ -37,10 +37,10 @@ class ErrorsView extends View {
 
         $this->main = 
         '<main class="container p-5 w-75">
-            <article class="alert bg-card border-secondary m-5 p-5 rounded-5 d-flex gap-5 flex-column align-items-center">
+            <div class="alert bg-card border-secondary m-5 p-5 rounded-5 d-flex gap-5 flex-column align-items-center">
                 <p class="fs-4">' . ERROR_TYPE[$key] . '</p>
                 <button class="btn btn-secondary bg-orange rounded-5" onclick="history.back()">VOLVER</button>
-            </article>
+            </div>
         </main>';
     }
 }

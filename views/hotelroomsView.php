@@ -65,7 +65,7 @@ class HotelRoomsView extends View {
         '<div class="modal fade" tabindex="-1" aria-hidden="true" id="reservar">
             <div class="modal-dialog">
                 <form class="modal-content bg-card rounded-5" action="./index.php?c=Bookings&a=insert" method="post">
-                    <input type="hidden" id="id_hab" name="id"/>
+                    <input type="hidden" id="id_hab" name="id">
                     <div class="modal-header">
                         <p class="modal-title fs-5 text-center">RESERVAR HABITACIÓN</p>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -73,11 +73,11 @@ class HotelRoomsView extends View {
                     <div class="modal-body d-flex flex-column gap-3 align-center text-center">
                         <div class="d-flex flex-column">
                             <p class="fs-3">FECHA DE ENTRADA</p>
-                            <input type="date" class="w-50 mx-auto" name="reserva_entrada" min="' . $fecha_actual . '" max="' . $fecha_max . '" required/>
+                            <input type="date" class="w-50 mx-auto" name="reserva_entrada" min="' . $fecha_actual . '" max="' . $fecha_max . '" required>
                         </div>
                         <div class="d-flex flex-column">
                             <p class="fs-3">FECHA DE SALIDA</p>
-                            <input type="date" class="w-50 mx-auto" name="reserva_salida" min="' . $fecha_actual . '" max="' . $fecha_max . '" required/>
+                            <input type="date" class="w-50 mx-auto" name="reserva_salida" min="' . $fecha_actual . '" max="' . $fecha_max . '" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -104,7 +104,7 @@ class HotelRoomsView extends View {
         $string = 
         '<main class="container p-5">
         <h1 class="mb-5 text-center">' . $hotel->nombre . '</h1>
-            <article class="card border-secondary m-3 row rounded-5 d-flex flex-column">
+            <div class="card border-secondary m-3 row rounded-5 d-flex flex-column">
                 <div class="hotel__header overflow-hidden position-relative rounded-top-5 p-0">
                     <img src="data:image/jpg;base64,' . base64_encode($hotel->foto) .'" alt="'. $hotel->id .'" class="position-absolute w-100 z-0">
                     <div class="position-absolute z-1 p-5 hotel__bg w-100 h-100">
@@ -116,7 +116,7 @@ class HotelRoomsView extends View {
                         <p class="mb-5 fs-5">' . $hotel->descripcion . '</p>'
                         . self::buildRoomsTable($habitaciones) . 
                 '</div>
-            </article>
+            </div>
         </main>';
         $this->main = $string;
     }

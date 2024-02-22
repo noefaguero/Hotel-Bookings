@@ -11,7 +11,7 @@
 					</li>
 				</ul>
 			</div>
-			<h1 class="col-6 fs-2 logo py-2 m-0 text-center">HEAVEN ROOMS</h1>
+			<p class="col-6 fs-2 logo py-2 m-0 text-center">HEAVEN ROOMS</p>
 			<div class="col-3 d-flex justify-content-end gap-3">
 				<a class="d-flex border justify-content-center align-items-center gap-3 border-secondary rounded-5 px-3 py-1 nav-link" href="#">
 				<svg 

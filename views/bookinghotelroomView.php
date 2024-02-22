@@ -35,35 +35,37 @@ class BookingHotelRoomView extends View {
         include_once './lib/functions/formatDate.php';
         $main = 
         '<main class="container p-5 w-75">
-            <h1 class="mb-5 ms-3">' . 'Reserva en ' . $hotel->nombre . '</h1>
-            <article class="alert bg-card border-secondary m-3 p-5 rounded-5">
-                <div class="d-flex justify-content-between">
-                    <h2 class="fw-bold fs-5 m-0">ENTRADA</h2>
-                    <p class="fs-5 m-0 pe-3">' . formatDate($reserva->fecha_entrada) . '</p>
+            <h1 class="mb-5 text-center">' . 'Reserva en ' . $hotel->nombre . '</h1>
+            <div class="alert bg-card border-secondary m-3 p-5 rounded-5">
+                <div class="d-flex justify-content-between px-3">
+                    <p class="fw-bold fs-5 m-0">ENTRADA</p>
+                    <p class="fs-5 m-0">' . formatDate($reserva->fecha_entrada) . '</p>
                 </div>
                 <hr>
-                <div class="d-flex justify-content-between">
-                    <h2 class="fw-bold fs-5 m-0">SALIDA</h2>
-                    <p class="fs-5 m-0 pe-3">' . formatDate($reserva->fecha_salida) . '</p>
+                <div class="d-flex justify-content-between px-3">
+                    <p class="fw-bold fs-5 m-0">SALIDA</p>
+                    <p class="fs-5 m-0">' . formatDate($reserva->fecha_salida) . '</p>
                 </div>
                 <hr>
-                <h2 class="fw-bold fs-5 mb-3"> DIRECCIÓN </h2>
-                <p>' . $hotel->direccion . '</p>
-                <p>' . $hotel->ciudad . ', ' . $hotel->pais . '</p>
+                <div class="px-3">
+                    <p class="fw-bold fs-5 mb-3"> DIRECCIÓN </p>
+                    <p>' . $hotel->direccion . '</p>
+                    <p>' . $hotel->ciudad . ', ' . $hotel->pais . '</p>
+                    <hr>
+                    <p class="fw-bold fs-5 mb-3"> HABITACIÓN </p>
+                    <p> Nº ' . $habitacion->num_habitacion . ' - ' .$habitacion->tipo . '</p>
+                    <p>' . $habitacion->descripcion . '</p>
+                </div>
                 <hr>
-                <h2 class="fw-bold fs-5 mb-3"> HABITACIÓN </h2>
-                <p> Nº ' . $habitacion->num_habitacion . ' - ' .$habitacion->tipo . '</p>
-                <p>' . $habitacion->descripcion . '</p>
-                <hr>
-                <div class="d-flex justify-content-between">
-                    <h2 class="fw-bold fs-5 m-0">PRECIO</h2>
-                    <p class="fs-5 m-0 pe-3">' . $habitacion->precio . '€</p>
+                <div class="d-flex justify-content-between px-3">
+                    <p class="fw-bold fs-5 m-0">PRECIO</p>
+                    <p class="fs-5 m-0">' . $habitacion->precio . '€</p>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-center pt-5">
                     <button type="button" class="btn btn-secondary rounded-5" data-bs-toggle="modal" data-bs-target="#anular">Anular Reserva</button>
                 </div>
-            </article>
+            </div>
         </main>';
 
         $modal = 
@@ -80,7 +82,7 @@ class BookingHotelRoomView extends View {
                     <div class="modal-footer">
                         <button class="btn btn-secondary rounded-5" data-bs-dismiss="modal">Cancelar</button>
                         <form action="./index.php?c=Bookings&a=delete" method="post">
-                            <input type="hidden" name="id" value="' . $reserva->id . '"/>
+                            <input type="hidden" name="id" value="' . $reserva->id . '">
                             <button class="btn btn-danger rounded-5" data-bs-dismiss="modal">Anular</button>
                         </form>
                     </div>
